@@ -1,13 +1,13 @@
 {
   "name": "calendar",
   "version": "1.0.0",
-  "description": "",
+  "description": "Google calendar API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index"
   },
   "keywords": [],
-  "author": "",
+  "author": "Vitor Barbosa",
   "license": "ISC",
   "dependencies": {
     "node-google-calendar": "^1.1.1"
