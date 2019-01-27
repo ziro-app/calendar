@@ -1,6 +1,6 @@
 node_modules
-dist
-.DS_Store
+functions
 .env
-settings.js
+.DS_Store
+settings
 credentials_google.json

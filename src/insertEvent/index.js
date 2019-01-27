@@ -1,11 +1,11 @@
 require('dotenv').config()
-const settings = require('./settings.js')
+const settings = require('../settings/index')
 const calendarAPI = require('node-google-calendar')
-const calendar = new calendarAPI(settings)
 
-const runCalendar = async ({ Events }) => {
+const insertEvent = async () => {
 	try {
-		const myEvents = await Events.list(process.env.CALENDAR_ID, {
+		const calendar = new calendarAPI(settings)
+		const myEvents = await calendar.Events.list(process.env.CALENDAR_ID, {
 			timeMin: '2018-05-20T06:00:00+08:00',
 			timeMax: '2019-05-25T22:00:00+08:00'
 		})
@@ -23,10 +23,11 @@ const runCalendar = async ({ Events }) => {
 			],
 			'colorId': 1
 		}
-		const createdEvent = await Events.insert(process.env.CALENDAR_ID, newEvent)
+		const createdEvent = await calendar.Events.insert(process.env.CALENDAR_ID, newEvent)
+		return createdEvent
 	} catch (error) {
 		console.log(JSON.parse(error.message).error.errorBody)
 	}
 }
 
-runCalendar(calendar)
+module.exports = insertEvent

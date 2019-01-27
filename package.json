@@ -4,13 +4,15 @@
   "description": "Google calendar API",
   "main": "index.js",
   "scripts": {
-    "start": "node index"
+    "start": "netlify-lambda serve ./src/functions_src",
+    "build": "netlify-lambda build ./src/functions_src"
   },
   "keywords": [],
   "author": "Vitor Barbosa",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^6.2.0",
+    "netlify-lambda": "^1.3.0",
     "node-google-calendar": "^1.1.1"
   }
 }
