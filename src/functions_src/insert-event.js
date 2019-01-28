@@ -17,4 +17,5 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 	}
 }
 
+// curl -d '{"data": "example"}' -X POST https://calendar.ziro.online/.netlify/functions/insert-event
 // curl -d '{"data": "example"}' -X POST http://localhost:9000/insert-event

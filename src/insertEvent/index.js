@@ -11,17 +11,16 @@ const insertEvent = async () => {
 		})
 		console.log(myEvents.length)
 		const newEvent = {
-			'start': { 'dateTime': '2019-01-25T07:00:00+01:00' },
-			'end': { 'dateTime': '2019-01-25T08:00:00+00:00' },
+			'start': { 'dateTime': '2019-01-30T07:00:00+01:00' },
+			'end': { 'dateTime': '2019-01-30T08:00:00+01:00' },
 			'location': 'Coffeeshop',
 			'summary': 'Breakfast',
 			'status': 'confirmed',
 			'description': 'VIP only',
-			'sendNotifications': true,
 			'attendees': [
 				{ 'email': 'v@gmail.com', 'responseStatus': 'accepted' }
 			],
-			'colorId': 1
+			'colorId': '1'
 		}
 		const createdEvent = await calendar.Events.insert(process.env.CALENDAR_ID, newEvent)
 		return createdEvent
