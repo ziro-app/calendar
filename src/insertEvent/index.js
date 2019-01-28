@@ -4,6 +4,9 @@ const calendarAPI = require('node-google-calendar')
 
 const insertEvent = async () => {
 	try {
+		console.log(process.env.CLIENT_EMAIL)
+		console.log(process.env.PRIVATE_KEY)
+		console.log(process.env.CALENDAR_ID)
 		const calendar = new calendarAPI(settings)
 		const myEvents = await calendar.Events.list(process.env.CALENDAR_ID, {
 			timeMin: '2018-05-20T06:00:00+08:00',
