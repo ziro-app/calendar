@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "netlify-lambda serve ./src/functions_src",
-    "build": "netlify-lambda build ./src/functions_src"
+    "build": "node ./deploy/step.js && netlify-lambda build ./src/functions_src"
   },
   "keywords": [],
   "author": "Vitor Barbosa",
