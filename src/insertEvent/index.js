@@ -26,7 +26,7 @@ const insertEvent = async () => {
 		const createdEvent = await calendar.Events.insert(process.env.CALENDAR_ID, newEvent)
 		return createdEvent
 	} catch (error) {
-		console.log(JSON.parse(error.message).error.errorBody)
+		console.log(error)
 	}
 }
 
