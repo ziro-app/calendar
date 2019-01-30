@@ -6,14 +6,21 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 		'Access-Control-Allow-Headers': 'Content-Type',
 		'Vary': 'Origin'
 	}
-	// const methodOk = httpMethod === 'POST'
-	// const parametersOK = Object.keys(queryStringParameters).length === 0
-	// if (methodOk)
-	const result = await insertEvent(JSON.parse(body))
-	return {
-		headers,
-		statusCode: 200,
-		body: JSON.stringify(result, null, 4)
+	const methodOk = httpMethod === 'POST'
+	const parametersOK = Object.keys(queryStringParameters).length === 0
+	if (methodOk && parametersOK) {
+		const result = await insertEvent(JSON.parse(body))
+		return {
+			headers,
+			statusCode: 200,
+			body: JSON.stringify(result, null, 4)
+		}
+	} else {
+		return {
+			headers,
+			statusCode: 200,
+			body: JSON.stringify({ message: 'Error. Check method or query parameters' }, null, 4)
+		}
 	}
 }
 

@@ -14,7 +14,6 @@ const insertEvent = async ({ reseller, representative, category, end, time, addr
 			'status': 'confirmed',
 			'colorId': '1'
 		}
-		console.log(newEvent)
 		return await calendar.Events.insert(process.env.CALENDAR_ID, newEvent)
 	} catch (error) {
 		console.log(error)
