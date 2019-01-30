@@ -2,28 +2,20 @@ require('dotenv').config()
 const settings = require('../settings/index')
 const calendarAPI = require('node-google-calendar')
 
-const insertEvent = async () => {
+const insertEvent = async ({ reseller, representative, category, end, time, address, transport, packaging, invoice }) => {
 	try {
 		const calendar = new calendarAPI(settings)
-		const myEvents = await calendar.Events.list(process.env.CALENDAR_ID, {
-			timeMin: '2018-05-20T06:00:00+08:00',
-			timeMax: '2019-05-25T22:00:00+08:00'
-		})
-		console.log(myEvents.length)
 		const newEvent = {
-			'start': { 'dateTime': '2019-01-30T07:00:00+01:00' },
-			'end': { 'dateTime': '2019-01-30T08:00:00+01:00' },
-			'location': 'Coffeeshop',
-			'summary': 'Breakfast',
+			'start': { 'dateTime': `${end}T${time}` },
+			'end': { 'dateTime': `${end}T${time}` },
+			'location': `${address}`,
+			'summary': `${reseller}`,
+			'description': `— Assessor: ${representative}\n— Categoria: ${category}\n— Forma: ${transport}\n— Fardo: ${packaging}\n— Nota: ${invoice}`,
 			'status': 'confirmed',
-			'description': 'VIP only',
-			'attendees': [
-				{ 'email': 'v@gmail.com', 'responseStatus': 'accepted' }
-			],
 			'colorId': '1'
 		}
-		const createdEvent = await calendar.Events.insert(process.env.CALENDAR_ID, newEvent)
-		return createdEvent
+		console.log(newEvent)
+		return await calendar.Events.insert(process.env.CALENDAR_ID, newEvent)
 	} catch (error) {
 		console.log(error)
 	}

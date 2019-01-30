@@ -9,7 +9,7 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 	// const methodOk = httpMethod === 'POST'
 	// const parametersOK = Object.keys(queryStringParameters).length === 0
 	// if (methodOk)
-	const result = await insertEvent()
+	const result = await insertEvent(JSON.parse(body))
 	return {
 		headers,
 		statusCode: 200,
@@ -17,5 +17,5 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 	}
 }
 
-// curl -d '{"data": "example"}' -X POST https://calendar.ziro.online/.netlify/functions/insert-event
-// curl -d '{"data": "example"}' -X POST http://localhost:9000/insert-event
+// curl -d '{"reseller": "THEWISH COMERCIAL LTDA", "representative": "Rubia", "category": "Troca", "end": "2019-01-30", "time": "17:00:00-02:00", "address": "Av. Tiradentes, 826", "transport": "Aplicativo de Entrega", "packaging": "Sacolas", "invoice": "Karmani, Absolutti"}' -X POST https://calendar.ziro.online/.netlify/functions/insert-event
+// curl -d '{"reseller": "THEWISH COMERCIAL LTDA", "representative": "Rubia", "category": "Troca", "end": "2019-01-30", "time": "17:00:00-02:00", "address": "Av. Tiradentes, 826", "transport": "Aplicativo de Entrega", "packaging": "Sacolas", "invoice": "Karmani, Absolutti"}' -X POST http://localhost:9000/insert-event
