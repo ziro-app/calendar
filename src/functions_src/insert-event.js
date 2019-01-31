@@ -11,6 +11,7 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 		methodError: 'Error. Invalid http method',
 		parametersError: 'Error. Invalid parameters',
 		executionError: 'Error. Internal execution error',
+		apiError: 'Error. Bad request to calendar API',
 		ok: 'Success'
 	}
 	let state = 'ok'
@@ -20,6 +21,12 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 		state = 'parametersError'
 	if (state === 'ok') {
 		const result = await insertEvent(JSON.parse(body))
+		if (!result)
+			state = 'executionError'
+		if (result.error) {
+			state = 'apiError'
+			console.log(result.error.errorBody.error)
+		}
 		return {
 			headers,
 			statusCode,
@@ -28,8 +35,8 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 	} else {
 		return {
 			headers,
-			statusCode: 200,
-			body: JSON.stringify({ message: 'Error. Check method or query parameters' }, null, 4)
+			statusCode,
+			body: JSON.stringify(message[state], null, 4)
 		}
 	}
 }
