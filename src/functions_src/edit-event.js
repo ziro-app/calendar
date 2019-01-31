@@ -19,9 +19,9 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 		try {
 			const apiResponseList = await listEvent(calendar)
 			if (!apiResponseList)
-				state = 'executionError'
+				state = 'listExecutionError'
 			if (apiResponseList.error) {
-				state = 'apiError'
+				state = 'listApiError'
 				console.log(apiResponseList.error.errorBody.error)
 			}
 			if (state === 'ok') {
@@ -29,18 +29,18 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 				const [ event ] = apiResponseList.filter( ({ id }) => id === '0bjne6bm7g677bv693aqkgem2k')
 				const apiResponseDelete = await deleteEvent(calendar, event)
 				if (!apiResponseDelete)
-					state = 'executionError'
+					state = 'deleteExecutionError'
 				if (apiResponseDelete.error) {
-					state = 'apiError'
+					state = 'deleteApiError'
 					console.log(apiResponseDelete.error.errorBody.error)
 				}
 				if (state === 'ok') {
 					const apiResponseInsert = await insertEvent(calendar, JSON.parse(body))
 					console.log(apiResponseInsert)
 					if (!apiResponseInsert)
-						state = 'executionError'
+						state = 'insertExecutionError'
 					if (apiResponseInsert.error) {
-						state = 'apiError'
+						state = 'insertApiError'
 						console.log(apiResponseInsert.error.errorBody.error)
 					}
 				}
