@@ -17,7 +17,7 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 	if (state === 'ok') {
 		try {
 			const calendarResponse = await listEvent(calendar)
-			console.log(calendarResponse)
+			console.log(calendarResponse.length)
 			// const calendarResponse = await insertEvent(calendar, JSON.parse(body))
 			if (!calendarResponse)
 				state = 'executionError'

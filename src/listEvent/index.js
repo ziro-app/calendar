@@ -1,8 +1,10 @@
+const oneYearFromNow = require('../utils/oneYearFromNow')
+
 const listEvent = async (calendar) => {
 	try {
 		const params = {
 			timeMin: '2019-01-01T05:00:00-02:00',
-			timeMax: `2019-02-01T05:00:00-02:00`
+			timeMax: `${oneYearFromNow()}-02:00`
 		}
 		return await calendar.Events.list(process.env.CALENDAR_ID, params)
 	} catch (error) {
