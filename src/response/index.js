@@ -8,6 +8,7 @@ const response = (state) => {
 	const message = {
 		methodError: 'Error. Invalid http method',
 		parametersError: 'Error. Invalid parameters',
+		executionError: 'Error. Internal execution error on runtime. Check logs',
 		listExecutionError: 'Error. Internal execution error on list function. Check logs',
 		listApiError: 'Error. Bad request to calendar list API. Check logs',
 		deleteExecutionError: 'Error. Internal execution error on delete function. Check logs',

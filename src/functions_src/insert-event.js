@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const response = require('../response/index')
-const insertEvent = require('../insertEvent/index')
+const insert = require('../insert/index')
 
 const settings = require('../settings/index')
 const calendarAPI = require('node-google-calendar')
