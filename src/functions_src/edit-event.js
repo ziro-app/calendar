@@ -26,14 +26,23 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 			}
 			if (state === 'ok') {
 				console.log(apiResponseList)
-				const [ event ] = apiResponseList.filter( ({ id }) => id === 'lufn6di62oe0vltkkjik31e3sg' )
-				console.log(event)
+				const [ event ] = apiResponseList.filter( ({ id }) => id === '0bjne6bm7g677bv693aqkgem2k')
 				const apiResponseDelete = await deleteEvent(calendar, event)
 				if (!apiResponseDelete)
 					state = 'executionError'
 				if (apiResponseDelete.error) {
 					state = 'apiError'
 					console.log(apiResponseDelete.error.errorBody.error)
+				}
+				if (state === 'ok') {
+					const apiResponseInsert = await insertEvent(calendar, JSON.parse(body))
+					console.log(apiResponseInsert)
+					if (!apiResponseInsert)
+						state = 'executionError'
+					if (apiResponseInsert.error) {
+						state = 'apiError'
+						console.log(apiResponseInsert.error.errorBody.error)
+					}
 				}
 			}
 		} catch (error) {
