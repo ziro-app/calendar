@@ -1,8 +1,9 @@
 require('dotenv').config()
 
 const response = require('../response/index')
-const insertEvent = require('../insertEvent/index')
 const listEvent = require('../listEvent/index')
+const deleteEvent = require('../deleteEvent/index')
+const insertEvent = require('../insertEvent/index')
 
 const settings = require('../settings/index')
 const calendarAPI = require('node-google-calendar')
@@ -16,14 +17,24 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 		state = 'parametersError'
 	if (state === 'ok') {
 		try {
-			const calendarResponse = await listEvent(calendar)
-			console.log(calendarResponse.length)
-			// const calendarResponse = await insertEvent(calendar, JSON.parse(body))
-			if (!calendarResponse)
+			const apiResponseList = await listEvent(calendar)
+			if (!apiResponseList)
 				state = 'executionError'
-			if (calendarResponse.error) {
+			if (apiResponseList.error) {
 				state = 'apiError'
-				console.log(calendarResponse.error.errorBody.error)
+				console.log(apiResponseList.error.errorBody.error)
+			}
+			if (state === 'ok') {
+				console.log(apiResponseList)
+				const [ event ] = apiResponseList.filter( ({ id }) => id === 'lufn6di62oe0vltkkjik31e3sg' )
+				console.log(event)
+				const apiResponseDelete = await deleteEvent(calendar, event)
+				if (!apiResponseDelete)
+					state = 'executionError'
+				if (apiResponseDelete.error) {
+					state = 'apiError'
+					console.log(apiResponseDelete.error.errorBody.error)
+				}
 			}
 		} catch (error) {
 			console.log(error.message)
