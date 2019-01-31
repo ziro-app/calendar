@@ -17,7 +17,7 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 				console.log(calendarResponse.error.errorBody.error)
 			}
 		} catch (error) {
-			console.log(error)
+			console.log(error.message)
 			state = 'executionError'
 		}
 	}
