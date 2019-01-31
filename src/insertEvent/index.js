@@ -1,9 +1,5 @@
-const settings = require('../settings/index')
-const calendarAPI = require('node-google-calendar')
-
-const insertEvent = async ({ reseller, representative, category, end, time, address, transport, packaging, invoice }) => {
+const insertEvent = async (calendar, { reseller, representative, category, end, time, address, transport, packaging, invoice }) => {
 	try {
-		const calendar = new calendarAPI(settings)
 		const newEvent = {
 			'start': { 'dateTime': `${end}T${time}` },
 			'end': { 'dateTime': `${end}T${time}` },
