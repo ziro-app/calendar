@@ -6,7 +6,7 @@ const insertEvent = async ({ reseller, representative, category, end, time, addr
 	try {
 		const calendar = new calendarAPI(settings)
 		const newEvent = {
-			'start': { 'dateTime': `${end}T${time}` },
+			'start': { 'dateTime': `${en}T${time}` },
 			'end': { 'dateTime': `${end}T${time}` },
 			'location': `${address}`,
 			'summary': `${reseller}`,
@@ -16,10 +16,8 @@ const insertEvent = async ({ reseller, representative, category, end, time, addr
 		}
 		return await calendar.Events.insert(process.env.CALENDAR_ID, newEvent)
 	} catch (error) {
-		if (error.message) {
-			console.log(JSON.parse(error.message))
+		if (error.message)
 			return JSON.parse(error.message)
-		}
 		return null
 	}
 }

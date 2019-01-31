@@ -1,44 +1,27 @@
+const response = require('../response/index')
 const insertEvent = require('../insertEvent/index')
 
 exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
-	const headers = {
-		'Access-Control-Allow-Origin': '*',
-		'Access-Control-Allow-Headers': 'Content-Type',
-		'Vary': 'Origin'
-	}
-	const statusCode = 200
-	const message = {
-		methodError: 'Error. Invalid http method',
-		parametersError: 'Error. Invalid parameters',
-		executionError: 'Error. Internal execution error',
-		apiError: 'Error. Bad request to calendar API',
-		ok: 'Success'
-	}
 	let state = 'ok'
 	if (httpMethod !== 'POST')
 		state = 'methodError'
 	if (Object.keys(queryStringParameters).length !== 0)
 		state = 'parametersError'
 	if (state === 'ok') {
-		const result = await insertEvent(JSON.parse(body))
-		if (!result)
+		try {
+			const calendarResponse = await insertEvent(JSON.parse(body))
+			if (!calendarResponse)
+				state = 'executionError'
+			if (calendarResponse.error) {
+				state = 'apiError'
+				console.log(calendarResponse.error.errorBody.error)
+			}
+		} catch (error) {
+			console.log(error)
 			state = 'executionError'
-		if (result.error) {
-			state = 'apiError'
-			console.log(result.error.errorBody.error)
-		}
-		return {
-			headers,
-			statusCode,
-			body: JSON.stringify(message[state], null, 4)
-		}
-	} else {
-		return {
-			headers,
-			statusCode,
-			body: JSON.stringify(message[state], null, 4)
 		}
 	}
+	return response(state)
 }
 
 // curl -d '{"reseller": "THEWISH COMERCIAL LTDA", "representative": "Rubia", "category": "Troca", "end": "2019-01-31", "time": "17:00:00-02:00", "address": "Av. Tiradentes, 826", "transport": "Aplicativo de Entrega", "packaging": "Sacolas", "invoice": "Karmani, Absolutti"}' -X POST https://calendar.ziro.online/.netlify/functions/insert-event
