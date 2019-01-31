@@ -1,6 +1,12 @@
 require('dotenv').config()
+
 const response = require('../response/index')
 const insertEvent = require('../insertEvent/index')
+const listEvent = require('../listEvent/index')
+
+const settings = require('../settings/index')
+const calendarAPI = require('node-google-calendar')
+const calendar = new calendarAPI(settings)
 
 exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 	let state = 'ok'
@@ -10,7 +16,8 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 		state = 'parametersError'
 	if (state === 'ok') {
 		try {
-			const calendarResponse = await insertEvent(JSON.parse(body))
+			const calendarResponse = await listEvent(calendar)
+			// const calendarResponse = await insertEvent(calendar, JSON.parse(body))
 			if (!calendarResponse)
 				state = 'executionError'
 			if (calendarResponse.error) {

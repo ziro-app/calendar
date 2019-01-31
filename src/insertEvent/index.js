@@ -1,4 +1,3 @@
-require('dotenv').config()
 const settings = require('../settings/index')
 const calendarAPI = require('node-google-calendar')
 
