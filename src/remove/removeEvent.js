@@ -1,4 +1,4 @@
-const deleteEvent = async (calendar, { id }) => {
+const removeEvent = async (calendar, { id }) => {
 	try {
 		return await calendar.Events.delete(process.env.CALENDAR_ID, id, {})
 	} catch (error) {
@@ -10,4 +10,4 @@ const deleteEvent = async (calendar, { id }) => {
 	}
 }
 
-module.exports = deleteEvent
+module.exports = removeEvent

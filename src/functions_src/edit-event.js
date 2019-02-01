@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const response = require('../response/index')
 const listEvent = require('../listEvent/index')
-const deleteEvent = require('../deleteEvent/index')
+const remove = require('../remove/index')
 const insert = require('../insert/index')
 
 const settings = require('../settings/index')
@@ -27,13 +27,7 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 			if (state === 'ok') {
 				console.log(apiResponseList)
 				const [ event ] = apiResponseList.filter( ({ id }) => id === 'kgcf91801avl6otrbj7l54l1ss')
-				const apiResponseDelete = await deleteEvent(calendar, event)
-				if (!apiResponseDelete)
-					state = 'deleteExecutionError'
-				if (apiResponseDelete.error) {
-					state = 'deleteApiError'
-					console.log(apiResponseDelete.error.errorBody.error)
-				}
+				state = await remove(calendar, event)
 				if (state === 'ok')
 					state = await insert(calendar, body)
 			}

@@ -11,8 +11,8 @@ const response = (state) => {
 		executionError: 'Error. Internal execution error on runtime. Check logs',
 		listExecutionError: 'Error. Internal execution error on list function. Check logs',
 		listApiError: 'Error. Bad request to calendar list API. Check logs',
-		deleteExecutionError: 'Error. Internal execution error on delete function. Check logs',
-		deleteApiError: 'Error. Bad request to calendar delete API. Check logs',
+		removeExecutionError: 'Error. Internal execution error on remove function. Check logs',
+		removeApiError: 'Error. Bad request to calendar remove API. Check logs',
 		insertExecutionError: 'Error. Internal execution error on insert function. Check logs',
 		insertApiError: 'Error. Bad request to calendar insert API. Check logs',
 		ok: 'Success'

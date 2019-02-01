@@ -15,13 +15,7 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 		state = 'parametersError'
 	if (state === 'ok') {
 		try {
-			const calendarResponse = await insertEvent(calendar, JSON.parse(body))
-			if (!calendarResponse)
-				state = 'insertExecutionError'
-			if (calendarResponse.error) {
-				state = 'insertApiError'
-				console.log(calendarResponse.error.errorBody.error)
-			}
+			state = await insert(calendar, body)
 		} catch (error) {
 			console.log(error.message)
 			state = 'executionError'
