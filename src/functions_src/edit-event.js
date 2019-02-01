@@ -1,12 +1,10 @@
 require('dotenv').config()
-
-const response = require('../response/index')
+const calendarAPI = require('node-google-calendar')
+const response = require('../utils/response')
+const settings = require('../utils/settings')
 const list = require('../list/index')
 const remove = require('../remove/index')
 const insert = require('../insert/index')
-
-const settings = require('../settings/index')
-const calendarAPI = require('node-google-calendar')
 
 exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 	try {
