@@ -1,6 +1,6 @@
 const listEvent = require('./listEvent')
 
-const list = async (calendar, { sale }) => {
+const list = async (calendar, { sale }, action) => {
 	const response = await listEvent(calendar)
 	if (!response)
 		return { status: 'listExecutionError', event: null }
@@ -9,9 +9,11 @@ const list = async (calendar, { sale }) => {
 		console.log(response.error.errorBody.error)
 	}
 	const [ event ] = response.filter( ({ description }) => description.substring(20,15) === sale)
-	if (event)
-		return { status: 'ok', event }
-	return { status: 'idError', event: null }
+	if (event && action === 'insert')
+		return { status: 'idExistsError', event: null }
+	if (!event && action === 'edit')
+		return { status: 'idDoesNotExistError', event: null }
+	return { status: 'ok', event }
 }
 
 module.exports = list
