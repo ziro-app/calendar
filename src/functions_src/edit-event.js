@@ -7,16 +7,16 @@ const insert = require('../insert/index')
 
 const settings = require('../settings/index')
 const calendarAPI = require('node-google-calendar')
-const calendar = new calendarAPI(settings)
 
 exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
-	let state = 'ok'
-	if (httpMethod !== 'POST')
-		state = 'methodError'
-	if (Object.keys(queryStringParameters).length !== 0)
-		state = 'parametersError'
-	if (state === 'ok') {
-		try {
+	try {
+		const calendar = new calendarAPI(settings)
+		let state = 'ok'
+		if (httpMethod !== 'POST')
+			state = 'methodError'
+		if (Object.keys(queryStringParameters).length !== 0)
+			state = 'parametersError'
+		if (state === 'ok') {
 			const { status, event } = await list(calendar)
 			state = status
 			if (state === 'ok') {
@@ -24,10 +24,10 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 				if (state === 'ok')
 					state = await insert(calendar, body)
 			}
-		} catch (error) {
-			console.log(error.message)
-			state = 'executionError'
 		}
+	} catch (error) {
+		console.log(error.message)
+		state = 'executionError'
 	}
 	return response(state)
 }

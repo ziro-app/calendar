@@ -8,7 +8,8 @@ const list = async (calendar) => {
 		return { status: 'listApiError', event: null }
 		console.log(response.error.errorBody.error)
 	}
-	const [ event ] = response.filter( ({ id }) => id === 'kgcf91801avl6otrbj7l54l1ss')
+	console.log(response)
+	const [ event ] = response.filter( ({ id }) => id === 'kvpu33adrffhef7d39fr6ejmg8')
 	return { status: 'ok', event }
 }
 
