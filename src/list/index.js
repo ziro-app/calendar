@@ -9,7 +9,9 @@ const list = async (calendar, { sale }) => {
 		console.log(response.error.errorBody.error)
 	}
 	const [ event ] = response.filter( ({ description }) => description.substring(20,15) === sale)
-	return { status: 'ok', event }
+	if (event)
+		return { status: 'ok', event }
+	return { status: 'idError', event: null }
 }
 
 module.exports = list
