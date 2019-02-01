@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const response = require('../response/index')
-const listEvent = require('../listEvent/index')
+const list = require('../list/index')
 const remove = require('../remove/index')
 const insert = require('../insert/index')
 
@@ -17,16 +17,9 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 		state = 'parametersError'
 	if (state === 'ok') {
 		try {
-			const apiResponseList = await listEvent(calendar)
-			if (!apiResponseList)
-				state = 'listExecutionError'
-			if (apiResponseList.error) {
-				state = 'listApiError'
-				console.log(apiResponseList.error.errorBody.error)
-			}
+			const { status, event } = await list(calendar)
+			state = status
 			if (state === 'ok') {
-				console.log(apiResponseList)
-				const [ event ] = apiResponseList.filter( ({ id }) => id === 'kgcf91801avl6otrbj7l54l1ss')
 				state = await remove(calendar, event)
 				if (state === 'ok')
 					state = await insert(calendar, body)

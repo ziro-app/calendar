@@ -3,11 +3,12 @@ const removeEvent = require('./removeEvent')
 const remove = async (calendar, event) => {
 	const response = await removeEvent(calendar, event)
 	if (!response)
-		state = 'removeExecutionError'
+		return 'removeExecutionError'
 	if (response.error) {
-		state = 'removeApiError'
+		return 'removeApiError'
 		console.log(response.error.errorBody.error)
 	}
+	return 'ok'
 }
 
 module.exports = remove
