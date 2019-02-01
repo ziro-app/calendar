@@ -5,9 +5,9 @@ const settings = require('../utils/settings')
 const insert = require('../insert/index')
 
 exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
+	const calendar = new calendarAPI(settings)
+	let state = 'ok'
 	try {
-		const calendar = new calendarAPI(settings)
-		let state = 'ok'
 		if (httpMethod !== 'POST')
 			state = 'methodError'
 		if (Object.keys(queryStringParameters).length !== 0)
