@@ -12,6 +12,7 @@ const insertEvent = async (calendar, {
 	transporte,
 	fardo,
 	nota,
+	observacoes
 }) => {
 	try {
 		const eventDateTime = formatDateTime(despacho, horario)
@@ -20,7 +21,7 @@ const insertEvent = async (calendar, {
 			'end': { 'dateTime': `${eventDateTime}` },
 			'location': `${endereco}`,
 			'summary': `${lojista}`,
-			'description': `— Atendimento: ${atendimento}\n— Assessor: ${assessor}\n— Categoria: ${categoria}\n— Tipo: ${tipo}\n— Transporte: ${transporte}\n— Fardo: ${fardo}\n— Nota Fiscal: ${nota}`,
+			'description': `— Atendimento: ${atendimento}\n— Assessor: ${assessor}\n— Categoria: ${categoria}\n— Tipo: ${tipo}\n— Transporte: ${transporte}\n— Fardo: ${fardo}\n— Nota Fiscal: ${nota}\n— Observações: ${observacoes}`,
 			'status': 'confirmed',
 			'colorId': '11'
 		}
