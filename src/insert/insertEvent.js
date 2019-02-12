@@ -1,3 +1,5 @@
+const formatDateTime = require('../utils/formatDateTime')
+
 const insertEvent = async (calendar, {
 	atendimento,
 	assessor,
@@ -9,12 +11,13 @@ const insertEvent = async (calendar, {
 	endereco,
 	transporte,
 	fardo,
-	nota
+	nota,
 }) => {
 	try {
+		const eventDateTime = formatDateTime(despacho, horario)
 		const newEvent = {
-			'start': { 'dateTime': `${despacho}T${horario}:00-00:00` },
-			'end': { 'dateTime': `${despacho}T${horario}:00-00:00` },
+			'start': { 'dateTime': `${eventDateTime}` },
+			'end': { 'dateTime': `${eventDateTime}` },
 			'location': `${endereco}`,
 			'summary': `${lojista}`,
 			'description': `— Atendimento: ${atendimento}\n— Assessor: ${assessor}\n— Categoria: ${categoria}\n— Tipo: ${tipo}\n— Transporte: ${transporte}\n— Fardo: ${fardo}\n— Nota Fiscal: ${nota}`,
