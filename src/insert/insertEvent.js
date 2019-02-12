@@ -13,8 +13,8 @@ const insertEvent = async (calendar, {
 }) => {
 	try {
 		const newEvent = {
-			'start': { 'dateTime': `${despacho}T${horario}` },
-			'end': { 'dateTime': `${despacho}T${horario}` },
+			'start': { 'dateTime': `${despacho}T${horario}:00-00:00` },
+			'end': { 'dateTime': `${despacho}T${horario}:00-00:00` },
 			'location': `${endereco}`,
 			'summary': `${lojista}`,
 			'description': `— Atendimento: ${atendimento}\n— Assessor: ${assessor}\n— Categoria: ${categoria}\n— Tipo: ${tipo}\n— Transporte: ${transporte}\n— Fardo: ${fardo}\n— Nota Fiscal: ${nota}`,
