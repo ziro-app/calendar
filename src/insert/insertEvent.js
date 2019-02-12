@@ -1,11 +1,23 @@
-const insertEvent = async (calendar, { sale, reseller, representative, category, end, time, address, transport, packaging, invoice }) => {
+const insertEvent = async (calendar, {
+	atendimento,
+	assessor,
+	lojista,
+	categoria,
+	tipo,
+	despacho,
+	horario,
+	endereco,
+	transporte,
+	fardo,
+	nota
+}) => {
 	try {
 		const newEvent = {
-			'start': { 'dateTime': `${end}T${time}` },
-			'end': { 'dateTime': `${end}T${time}` },
-			'location': `${address}`,
-			'summary': `${reseller}`,
-			'description': `— Atendimento: ${sale}\n— Assessor: ${representative}\n— Categoria: ${category}\n— Forma: ${transport}\n— Fardo: ${packaging}\n— Nota: ${invoice}`,
+			'start': { 'dateTime': `${despacho}T${horario}` },
+			'end': { 'dateTime': `${despacho}T${horario}` },
+			'location': `${endereco}`,
+			'summary': `${lojista}`,
+			'description': `— Atendimento: ${atendimento}\n— Assessor: ${assessor}\n— Categoria: ${categoria}\n— Tipo: ${tipo}\n— Transporte: ${transporte}\n— Fardo: ${fardo}\n— Nota Fiscal: ${nota}`,
 			'status': 'confirmed',
 			'colorId': '11'
 		}
@@ -20,3 +32,15 @@ const insertEvent = async (calendar, { sale, reseller, representative, category,
 }
 
 module.exports = insertEvent
+
+	// "atendimento":"10051",
+	// "assessor": "Rubia",
+	// "lojista": "THEWISH COMERCIAL LTDA",
+	// "categoria": "Troca",
+	// "tipo": "Online",
+	// "despacho": "2019-02-02",
+	// "horario": "17:00:00-02:00",
+	// "transporte": "DIRETO DO FORNECEDOR",
+	// "endereco": "PC MONS JOSE MARIA MONTEIRO, 28, SAO PAULO, SP",
+	// "fardo": "Livre",
+	// "nota": "Sem Nota"

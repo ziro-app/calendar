@@ -1,6 +1,6 @@
 const listEvent = require('./listEvent')
 
-const list = async (calendar, { sale }, action) => {
+const list = async (calendar, { atendimento }, action) => {
 	const response = await listEvent(calendar)
 	if (!response)
 		return { status: 'listExecutionError', event: null }
@@ -8,7 +8,9 @@ const list = async (calendar, { sale }, action) => {
 		return { status: 'listApiError', event: null }
 		console.log(response.error.errorBody.error)
 	}
-	const [ event ] = response.filter( ({ description }) => description.substring(20,15) === sale)
+	const [ event ] = response.filter( ({ description }) =>
+		description.substring(20,15) === atendimento
+	)
 	if (event && action === 'insert')
 		return { status: 'idExistsError', event: null }
 	if (!event && action === 'edit')
