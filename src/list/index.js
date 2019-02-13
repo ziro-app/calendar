@@ -5,8 +5,8 @@ const list = async (calendar, { atendimento }, action) => {
 	if (!response)
 		return { status: 'listExecutionError' }
 	if (response.error) {
-		return { status: 'listApiError' }
 		console.log(response.error.errorBody.error)
+		return { status: 'listApiError' }
 	}
 	const [ event ] = response.filter( ({ description }) =>
 		description.substring(20,15) === atendimento

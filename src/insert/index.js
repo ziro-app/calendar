@@ -5,8 +5,8 @@ const insert = async (calendar, body) => {
 	if (!response)
 		return 'insertExecutionError'
 	if (response.error) {
-		return 'insertApiError'
 		console.log(response.error.errorBody.error)
+		return 'insertApiError'
 	}
 	return 'ok'
 }

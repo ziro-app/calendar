@@ -8,8 +8,8 @@ const insertEvent = async (calendar, {
 	tipo,
 	despacho,
 	horario,
-	endereco,
 	transporte,
+	endereco,
 	fardo,
 	nota,
 	observacoes
