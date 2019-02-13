@@ -5,8 +5,8 @@ const remove = async (calendar, event) => {
 	if (!response)
 		return 'removeExecutionError'
 	if (response.error) {
-		return 'removeApiError'
 		console.log(response.error.errorBody.error)
+		return 'removeApiError'
 	}
 	return 'ok'
 }
