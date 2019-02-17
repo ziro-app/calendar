@@ -14,7 +14,7 @@ const list = async (calendar, { atendimento }, action) => {
 	if (event && action === 'insert')
 		return { status: 'idExistsError' }
 	if (!event && action === 'edit')
-		return { status: 'idDoesNotExistError' }
+		return { status: 'ok-idDoesNotExist' }
 	return { status: 'ok', event }
 }
 

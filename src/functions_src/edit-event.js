@@ -22,6 +22,8 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 				if (state === 'ok')
 					state = await insert(calendar, body)
 			}
+			if (state === 'ok-idDoesNotExist')
+				state = await insert(calendar, body)
 		}
 	} catch (error) {
 		console.log(error.message)
