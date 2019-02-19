@@ -14,10 +14,10 @@ exports.handler = async ({ httpMethod, queryStringParameters, body }) => {
 		if (Object.keys(queryStringParameters).length !== 0)
 			state = 'parametersError'
 		if (state === 'ok') {
-			const { status } = await list(calendar, JSON.parse(body), 'remove')
+			const { status, event } = await list(calendar, JSON.parse(body), 'remove')
 			state = status
 			if (state === 'ok')
-				state = await remove(calendar, body)
+				state = await remove(calendar, event)
 		}
 	} catch (error) {
 		console.log(error.message)
