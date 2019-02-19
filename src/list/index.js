@@ -11,10 +11,9 @@ const list = async (calendar, { atendimento }, action) => {
 	const [ event ] = response.filter( ({ description }) =>
 		description.substring(20,15) === atendimento
 	)
-	if (event && action === 'insert')
-		return { status: 'idExistsError' }
-	if (!event && action === 'edit')
-		return { status: 'ok-idDoesNotExist' }
+	if (event && action === 'insert') return { status: 'idExistsError' }
+	if (!event && action === 'edit') return { status: 'ok-idDoesNotExist' }
+	if (!event && action === 'remove') return { status: 'idDoesNotExistError' }
 	return { status: 'ok', event }
 }
 

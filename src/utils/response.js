@@ -10,6 +10,7 @@ const response = (state) => {
 		parametersError: 'Error. Invalid parameters',
 		executionError: 'Error. Internal execution error on runtime. Check logs',
 		idExistsError: 'Error. The event to be created already exists',
+		idDoesNotExistError: 'Error. The event to be removed does not exist',
 		listExecutionError: 'Error. Internal execution error on list function. Check logs',
 		listApiError: 'Error. Bad request to calendar list API. Check logs',
 		removeExecutionError: 'Error. Internal execution error on remove function. Check logs',
