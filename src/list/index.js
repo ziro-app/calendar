@@ -1,7 +1,7 @@
 const listEvent = require('./listEvent')
 
 const list = async (calendar, { atendimento }, action) => {
-	const response = await listEvent(calendar)
+	const response = await listEvent(calendar, atendimento)
 	if (!response)
 		return { status: 'listExecutionError' }
 	if (response.error) {
